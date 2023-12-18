@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Game of Life</title>
+</head>
+<body>
+    
+    <h1> Game of Life </h1>
+
+    <label for="">Densité des cellule</label>
+    <input type="range" name="" id="density" min="0.1" max="0.9" step="0.1">
+    
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+    
+
+    <p> Le jeu de la vie est un automate cellulaire. Le jeu de la vie est le plus populaire des automates cellulaire </p>
+    <p> Le concept d'automate cellulaire a été découvert vers les années 40</p>
+
+    <!-- 1 - Une Cellule vivante meurt si elle a moins de deux voisines vivantes -->
+    <!-- 2 - Une Cellule vivante surie si elle a deux ou trois voisine vivantes -->
+    <!-- 3 - Une Cellule vivante meurt si elle a plus de trois voisine vivantes -->
+    <!-- 4 - Une Cellule mort avec exactement 3 voisine devient une cellule vivante-->
+
+    <script src="main.js"></script>
+</body>
+</html>
