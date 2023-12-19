@@ -8,3 +8,9 @@ canvas{
     border: 1px solid black;
     margin-bottom: 15px;
 }
+#play{
+    margin-top: 10px;
+    background-color: black;
+    color: red;
+    margin-bottom: 15px;
+}
