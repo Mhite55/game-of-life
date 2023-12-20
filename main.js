@@ -1,6 +1,7 @@
 const density = document.getElementById('density');
 const canvas = document.getElementById('canvas');
 const start = document.getElementById('play')
+const reset = document.getElementById('reset')
 const ctx = canvas.getContext("2d");
 
 const gridSize = 50;
@@ -45,6 +46,10 @@ function getRandomBoolean(density){
     return Math.random() < density;
 }
 
+reset.addEventListener('click', function(){
+    initGrid(gridSize, 0);
+    drawPixel(drawGrid);
+})
 
 density.addEventListener('input', function() {
     let val = this.value;
@@ -127,17 +132,31 @@ function exchangeGrid() {
         }
     }
 }
-
-
-    canvas.addEventListener("click", function(e){
-        let limit = canvas.getBoundingClientRect(); 
-        let posX = e.clientX - limit.left;
-        let posY = e.clientY - limit.top;
-        let pX = Math.floor(posX / cellsSize)
-        let pY = Math.floor(posY / cellsSize)
-        drawGrid[pX][pY] = drawGrid[pX][pY] ? false : true
+    canvas.addEventListener('click', function (e){
+        let coordinate = getMouseCoordinates(e)
+        drawGrid[coordinate[0]][coordinate[1]] = drawGrid[coordinate[0]][coordinate[1]] ? false : true;
         drawPixel(drawGrid);
-        console.log(pX, pY)
+    })
+    
+    canvas.addEventListener('mousemove', function (e){
+        if (isMouseDown){
+            let coordinate = getMouseCoordinates(e)
+            drawGrid[coordinate[0]][coordinate[1]] = true;
+            drawPixel(drawGrid);
+        } 
+    })
+    
+    // Quand on clique
+    canvas.addEventListener('mousedown', function(){
+        isMouseDown = true
+    })
+    // Quand on relâche le click
+    canvas.addEventListener('mouseup', function(){
+        isMouseDown = false
+    })
+    // Quand on quitte le champ d'action
+    canvas.addEventListener('mouseout', function(){
+        isMouseDown = false
     })
 
 
@@ -150,7 +169,14 @@ start.addEventListener('click', function() {
     }
 })
 
-main();
+function getMouseCoordinates(event) {
+    let limit = canvas.getBoundingClientRect(); 
+        let posX = event.clientX - limit.left;
+        let posY = event.clientY - limit.top;
+        let pX = Math.floor(posX / cellsSize)
+        let pY = Math.floor(posY / cellsSize)
+        return [pX, pY];
+}
 
 initGrid(gridSize);
 
